@@ -8,11 +8,11 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-public class HiloDespliegueAppWeb extends Thread {
+public class HiloDespliegueAppWebLogin extends Thread {
 	
 	Server server;
 	
-	public HiloDespliegueAppWeb(Server server) {
+	public HiloDespliegueAppWebLogin(Server server) {
 		
 		this.server = server;
 	}
@@ -21,11 +21,11 @@ public class HiloDespliegueAppWeb extends Thread {
 		
 		while(server.isWebService()) {
 			System.out.println(":::Web Server Started:::");
-			ServerSocket serverSocket = server.getServerSocketWebService();
+			ServerSocket serverSocket = server.getServerSocketWebLogin();
 			try {
 				Socket cliente = serverSocket.accept();
 				System.out.println("Lee");
-				HiloClientHandler hilo = new HiloClientHandler(cliente, server);
+				HiloClientHandlerLogin hilo = new HiloClientHandlerLogin(cliente, server);
 				hilo.start();	
 				
 			} catch (IOException e) {

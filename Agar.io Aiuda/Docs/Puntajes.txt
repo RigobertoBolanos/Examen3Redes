@@ -1,1 +1,1 @@
-Juan,349,15/05/2019,Hugo/Paco/Luis,si
+juan&40.0&Wed May 15 12:14:48 COT 2019&No hubo adversarios&true#fer&40.0&Wed May 15 12:26:22 COT 2019&No hubo adversarios&true#diego&40.0&Wed May 15 12:28:07 COT 2019&No hubo adversarios&true#fer&40.0&Wed May 15 12:33:44 COT 2019&No hubo adversarios&true#mave&40.0&Wed May 15 12:43:57 COT 2019&&true#pelu&40.0&Wed May 15 12:46:15 COT 2019&No hubo adversarios&true#

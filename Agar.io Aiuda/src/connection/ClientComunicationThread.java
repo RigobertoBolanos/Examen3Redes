@@ -46,7 +46,7 @@ public class ClientComunicationThread extends Thread{
 				double posY=player.getBall().getPosY();
 				double radius=player.getBall().getRadius();
 				boolean active=player.getBall().isActive();
-				String send=client.getNick()+","+posX+","+posY+","+radius+","+active+","+client.getGui().getGame().isActive();
+				String send=client.getNick()+","+posX+","+posY+","+radius+","+active;
 				out.writeUTF(send);
 			}
 			

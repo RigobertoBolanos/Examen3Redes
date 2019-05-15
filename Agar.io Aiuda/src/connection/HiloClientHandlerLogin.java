@@ -14,12 +14,12 @@ import java.io.InputStreamReader;
 import java.net.Socket;
 import java.util.StringTokenizer;
 
-public class HiloClientHandler extends Thread{
+public class HiloClientHandlerLogin extends Thread{
 	
 	private Socket socket;
 	private Server server;
 	
-	public HiloClientHandler(Socket socket, Server server) {
+	public HiloClientHandlerLogin(Socket socket, Server server) {
 		
 		this.socket = socket;
 		this.server = server;
@@ -70,14 +70,34 @@ public class HiloClientHandler extends Thread{
 					String password=response[1].split("=")[1];
 					String respuesta[]=server.loginQuery(correo, password);
 					String mensajeObtenido = server.entregarPuntaje();
-					String[] lista = mensajeObtenido.split("\n");
+					String[] lista = mensajeObtenido.split("#");
 					StringBuilder responseBuffer =  new StringBuilder();
 					responseBuffer
 					.append("<html>")
 					.append("<head>")
 					.append("<style>")
 					.append("body{")
-					.append("	background-image: url(\"http://www.mascotahogar.com/Imagenes/wallpaper-de-un-caballo-blanco.jpg\");")
+					.append("	background-image: url(\"http://wallpapercave.com/wp/wp3161573.jpg\");")
+					.append("}")
+					.append("table{")
+					.append("	border: 1px solid #000;\r\n" + 
+							"	/*para quitarle los separadores a las celdas*/\r\n" + 
+							"	border-collapse: collapse;\r\n" + 
+							"	background: rgb(230,230,230);\r\n" + 
+							"	margin: auto;\r\n" + 
+							"	width: 100%)")
+					.append("}")
+					.append("table td{")
+					.append("border: 1px solid #000;\r\n" + 
+							"	padding: 20px;\r\n" + 
+							"	text-align: center;")
+					.append("}")
+					.append("table tr:hover{")
+					.append("background: #ccc;")
+					.append("}")
+					.append("table td:hover{")
+					.append("background: #000;\r\n" + 
+							"	color:white;")
 					.append("}")
 					.append("</style>")
 					.append("</head>")
@@ -85,12 +105,12 @@ public class HiloClientHandler extends Thread{
 					.append("<h1>Bienvenido "+respuesta[0]+" tu correo es: "+correo+"</h1>")
 					.append("<table>")
 					.append("<tr>")
-					.append("<td><strong>UserName</strong></td>")
-					.append("<td><strong>Score</strong></td>")
-					.append("<td><strong>Fecha</strong></td>")
-					.append("<td><strong>Adversarios</strong></td>")
-					.append("<td><strong>Gano?</strong></td>");
-					agregarlista(lista,responseBuffer, response[1].trim());
+					.append("<th><strong>UserName</strong></th>")
+					.append("<th><strong>Score</strong></th>")
+					.append("<th><strong>Fecha</strong></th>")
+					.append("<th><strong>Adversarios</strong></th>")
+					.append("<th><strong>Gano?</strong></th>");
+					agregarlista(lista,responseBuffer, respuesta[0]);
 					responseBuffer.append("<body>")
 					.append("<table>")
 					.append("<body>")
@@ -113,17 +133,19 @@ public class HiloClientHandler extends Thread{
 		}	
 		
 	}
-	private void agregarlista(String[] lista , StringBuilder responseBuffer, String cedula) {
+	private void agregarlista(String[] lista , StringBuilder responseBuffer, String nick) {
 		for (int i = 0; i < lista.length; i++) {
 			System.out.println("CHEQUEO LISTA :" + lista[i]);
-			
+			if(lista[i].split("&")[0].equals(nick))
+			{
 				responseBuffer.append("<tr>");
-				responseBuffer.append("<td>"+lista[i].split(",")[0]+"</td>");
-				responseBuffer.append("<td>"+lista[i].split(",")[1]+"</td>");
-				responseBuffer.append("<td>"+lista[i].split(",")[2]+"</td>");
-				responseBuffer.append("<td>"+lista[i].split(",")[3]+"</td>");
-				responseBuffer.append("<td>"+lista[i].split(",")[4]+"</td>");
+				responseBuffer.append("<td>"+lista[i].split("&")[0]+"</td>");
+				responseBuffer.append("<td>"+lista[i].split("&")[1]+"</td>");
+				responseBuffer.append("<td>"+lista[i].split("&")[2]+"</td>");
+				responseBuffer.append("<td>"+lista[i].split("&")[3]+"</td>");
+				responseBuffer.append("<td>"+lista[i].split("&")[4]+"</td>");
 				responseBuffer.append("<tr>");
+			}
 			
 		}
 		

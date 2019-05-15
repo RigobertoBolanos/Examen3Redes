@@ -8,3 +8,5 @@ quimbo,quimbo,quimbo
 Rokimen,Rokimen,Rokimen
 kuki,kuki,kuki
 Rokimen,rokimen.com,rokipass
+mave,mave,mave
+pelu,pelu,pelu

@@ -85,7 +85,7 @@ public class Client {
 //				audioClient = new AudioCliente();
 //				audioClient.start();
 				System.out.println(respond);
-				audioIndividual = new IndividualAudioCliente(this, Integer.parseInt(respond));
+				//audioIndividual = new IndividualAudioCliente(this, Integer.parseInt(respond));
 			}
 			else 
 			{

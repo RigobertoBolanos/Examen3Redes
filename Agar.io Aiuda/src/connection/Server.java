@@ -61,9 +61,11 @@ public class Server {
 	private ServidorChat servidorChat;
 	
 	private boolean webService ;
-	private ServerSocket serverSocketWebService;
-	private static final int PORT_WEB_SERVICE = 7000;
-	private HiloDespliegueAppWeb hiloDespliegueAppWeb;
+	
+	private ServerSocket serverSocketWebLogin;
+	private static final int PORT_WEB_LOGIN = 7000;
+	private HiloDespliegueAppWebLogin hiloDespliegueAppWebLogin;
+
 	
 	
 	public Server(int wait){
@@ -71,52 +73,54 @@ public class Server {
 	}
 	
 	public void initGameServer(int wait){
-//		try {
-//			System.setProperty("javax.net.ssl.keyStore", KEYSTORE_LOCATION);
-//			System.setProperty("javax.net.ssl.keyStorePassword", KEYSTORE_PASSWORD);
-//			game=new Game();
-//			//game.generateFood();
-//			userNames=new ArrayList<String>();
-//			playersSockets=new ArrayList<>();
-//			lobbyThreads=new ArrayList<ServerLobbyThread>();
-//			serverThreads=new ArrayList<ServerCommunicationThread>();
-//			serverSocketView=new DatagramSocket();
-//			viewThread=new ServerViewThread(this);
-//			viewThread.start();
-//			
-//			SSLServerSocketFactory ssf = (SSLServerSocketFactory) SSLServerSocketFactory.getDefault();
-//			serverSocket = ssf.createServerSocket(SERVER_PORT);
-//			System.out.println(serverSocket.getInetAddress().getLocalHost());
-//			
-//			serverSocketLobby=new ServerSocket(SERVER_PORT_LOBBY);
-//			serverSocketGame=new ServerSocket(SERVER_PORT_GAME);
-//			
-////			audioServer = new AudioServidor(CANCION_PREDET);
-////			audioServer.start();
-//			musicRequestServers = new ArrayList<>();
-//			
-//			asignationThread = new AsignationThread(this);
-//			asignationThread.start();
-//			timerThread=new TimerThread(asignationThread, wait);
-//			gameThread=new GameThread(this, 30);
-//			
-//			servidorChat = new ServidorChat();
-//			
+		try {
 			webService = true;
 			try {
-				serverSocketWebService = new ServerSocket(PORT_WEB_SERVICE);
+				serverSocketWebLogin = new ServerSocket(PORT_WEB_LOGIN);
 			} catch (Exception e) {
 				System.out.println(e.getMessage());
 			}
 		
-			hiloDespliegueAppWeb = new HiloDespliegueAppWeb(this);
-			hiloDespliegueAppWeb.start();
+			hiloDespliegueAppWebLogin = new HiloDespliegueAppWebLogin(this);
+			hiloDespliegueAppWebLogin.start();
 			
-//		} 
-//		catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
+			
+			System.setProperty("javax.net.ssl.keyStore", KEYSTORE_LOCATION);
+			System.setProperty("javax.net.ssl.keyStorePassword", KEYSTORE_PASSWORD);
+			game=new Game();
+			//game.generateFood();
+			userNames=new ArrayList<String>();
+			playersSockets=new ArrayList<>();
+			lobbyThreads=new ArrayList<ServerLobbyThread>();
+			serverThreads=new ArrayList<ServerCommunicationThread>();
+			serverSocketView=new DatagramSocket();
+			viewThread=new ServerViewThread(this);
+			viewThread.start();
+			
+			SSLServerSocketFactory ssf = (SSLServerSocketFactory) SSLServerSocketFactory.getDefault();
+			serverSocket = ssf.createServerSocket(SERVER_PORT);
+			System.out.println(serverSocket.getInetAddress().getLocalHost());
+			
+			serverSocketLobby=new ServerSocket(SERVER_PORT_LOBBY);
+			serverSocketGame=new ServerSocket(SERVER_PORT_GAME);
+			
+//			audioServer = new AudioServidor(CANCION_PREDET);
+//			audioServer.start();
+			musicRequestServers = new ArrayList<>();
+			
+			asignationThread = new AsignationThread(this);
+			asignationThread.start();
+			timerThread=new TimerThread(asignationThread, wait);
+			gameThread=new GameThread(this, 30);
+			
+			servidorChat = new ServidorChat();
+			
+			
+		} 
+		catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public String getInfoGame() {
@@ -205,7 +209,6 @@ public class Server {
 				}
 			}
 		}
-		game.setActive(Boolean.parseBoolean(dataSplit[5]));
 		
 	}
 	
@@ -442,21 +445,23 @@ public class Server {
 		this.webService = webService;
 	}
 
-	public ServerSocket getServerSocketWebService() {
-		return serverSocketWebService;
+	public ServerSocket getServerSocketWebLogin() {
+		return serverSocketWebLogin;
 	}
 
-	public void setServerSocketWebService(ServerSocket serverSocketWebService) {
-		this.serverSocketWebService = serverSocketWebService;
+	public void setServerSocketWebLogin(ServerSocket serverSocketWebLogin) {
+		this.serverSocketWebLogin = serverSocketWebLogin;
 	}
 
-	public HiloDespliegueAppWeb getHiloDespliegueAppWeb() {
-		return hiloDespliegueAppWeb;
+	public HiloDespliegueAppWebLogin getHiloDespliegueAppWebLogin() {
+		return hiloDespliegueAppWebLogin;
 	}
 
-	public void setHiloDespliegueAppWeb(HiloDespliegueAppWeb hiloDespliegueAppWeb) {
-		this.hiloDespliegueAppWeb = hiloDespliegueAppWeb;
+	public void setHiloDespliegueAppWebLogin(HiloDespliegueAppWebLogin hiloDespliegueAppWebLogin) {
+		this.hiloDespliegueAppWebLogin = hiloDespliegueAppWebLogin;
 	}
+
+
 	
 	
 	
